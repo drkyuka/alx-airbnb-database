@@ -1,12 +1,14 @@
-# Task 1: Craft a detailed Entity-Relationship Diagram (ERD) to visualize the database design, ensuring clear relationships and properly defined entities.
+# 🏆 Tas### 📋 Entities and Attributes
 
-## Visualize the ERD for a airbnb clone
+#### 👤 User: Craft a detailed Entity-Relationship Diagram (ERD) to visualize the database design, ensuring clear relationships and properly defined entities.
+
+## 🖼️ Visualize the ERD for a airbnb clone
 <img src="/alx-airbnb-database/ERD/entity_graph.png" alt="ERD Picture">
 
 ---
 
-## Database Specification
-### Entities and Attributes
+## 📊 Database Specification
+### 📋 Entities and Attributes
 
 #### User
 - user_id: Primary Key, UUID, Indexed
@@ -18,7 +20,7 @@
 - role: ENUM (guest, host, admin), NOT NULL
 - created_at: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP
 
-#### Property
+#### 🏠 Property
 - property_id: Primary Key, UUID, Indexed
 - host_id: Foreign Key, references User(user_id)
 - name: VARCHAR, NOT NULL
@@ -28,7 +30,7 @@
 - created_at: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP
 - updated_at: TIMESTAMP, ON UPDATE CURRENT_TIMESTAMP
 
-#### Booking
+#### 📅 Booking
 - booking_id: Primary Key, UUID, Indexed
 - property_id: Foreign Key, references Property(property_id)
 - user_id: Foreign Key, references User(user_id)
@@ -38,14 +40,14 @@
 - status: ENUM (pending, confirmed, canceled), NOT NULL
 - created_at: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP
 
-#### Payment
+#### 💰 Payment
 - payment_id: Primary Key, UUID, Indexed
 - booking_id: Foreign Key, references Booking(booking_id)
 - amount: DECIMAL, NOT NULL
 - payment_date: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP
 - payment_method: ENUM (credit_card, paypal, stripe), NOT NULL
 
-#### Review
+#### ⭐ Review
 - review_id: Primary Key, UUID, Indexed
 - property_id: Foreign Key, references Property(property_id)
 - user_id: Foreign Key, references User(user_id)
@@ -53,7 +55,7 @@
 - comment: TEXT, NOT NULL
 - created_at: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP
 
-#### Message
+#### 💬 Message
 - message_id: Primary Key, UUID, Indexed
 - sender_id: Foreign Key, references User(user_id)
 - recipient_id: Foreign Key, references User(user_id)
@@ -62,13 +64,13 @@
 
 ---
 
-### Constraints
+### 🔒 Constraints
 
-#### User Table
+#### 👤 User Table
 - Unique constraint on email.
 - Non-null constraints on required fields.
 
-#### Property Table
+#### 🏠 Property Table
 - Foreign key constraint on host_id.
 - Non-null constraints on essential attributes.
 
