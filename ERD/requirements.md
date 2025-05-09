@@ -1,7 +1,7 @@
 # Task 1: Craft a detailed Entity-Relationship Diagram (ERD) to visualize the database design, ensuring clear relationships and properly defined entities.
 
 ## Visualize the ERD for a airbnb clone
-<img src="/alx-airbnb-database/ERD/entity_graph.png" alt="ERD Picture">
+<img src="/entity_graph.png" alt="ERD Picture">
 
 ## Modelling Entity specification with DBML
 ```dbml
