@@ -1,4 +1,4 @@
-# 🏆 Tas### 📋 Entities and Attributes
+### 🏆 Task 0 📋 Entities and Attributes
 
 #### 👤 User: Craft a detailed Entity-Relationship Diagram (ERD) to visualize the database design, ensuring clear relationships and properly defined entities.
 
@@ -74,7 +74,7 @@
 - Foreign key constraint on host_id.
 - Non-null constraints on essential attributes.
 
-#### Booking Table
+#### 📅 Booking Table
 - Foreign key constraints on property_id and user_id.
 - status must be one of pending, confirmed, or canceled.
 
