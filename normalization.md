@@ -26,7 +26,7 @@ Booking
 - user_id: Foreign Key, references User(user_id)
 - start_date: DATE, NOT NULL
 - end_date: DATE, NOT NULL
-~~ - total_price: DECIMAL, NOT NULL ~~
+- ~~ total_price: DECIMAL, NOT NULL ~~
 - status: ENUM (pending, confirmed, canceled), NOT NULL
 - created_at: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP
 
