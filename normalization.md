@@ -18,9 +18,7 @@
 
 To ensure the 3NF normalization of the Booking table, the attribute `total_price` can be removed from the table.
 
-the revised `Booking` table is as follows:
-
-Booking
+The revised `Booking` table is as follows:
 - booking_id: Primary Key, UUID, Indexed
 - property_id: Foreign Key, references Property(property_id)
 - user_id: Foreign Key, references User(user_id)
@@ -29,5 +27,3 @@ Booking
 - ~~ total_price: DECIMAL, NOT NULL ~~
 - status: ENUM (pending, confirmed, canceled), NOT NULL
 - created_at: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP
-
-
