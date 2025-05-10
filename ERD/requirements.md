@@ -28,7 +28,7 @@
 - location: VARCHAR, NOT NULL
 - pricepernight: DECIMAL, NOT NULL
 - created_at: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP
-- updated_at: TIMESTAMP, ON UPDATE CURRENT_TIMESTAMP
+- updated_at: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP
 
 #### 📅 Booking
 - booking_id: Primary Key, UUID, Indexed
@@ -184,7 +184,7 @@ Table Review {
 }
 
 // create message table
-table Message {
+Table Message {
   message_id uuid [primary key, note: 'indexed']
   sender_id uuid [ref: > User.user_id]
   recipient_id uuid [ref: > User.user_id]
