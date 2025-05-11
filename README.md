@@ -1,4 +1,5 @@
 # alx-airbnb-database
+
 ---
 
 ## 0. Define Entities and Relationships in ER Diagram
