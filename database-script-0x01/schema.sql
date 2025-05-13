@@ -1,58 +1,58 @@
 CREATE TABLE `User` (
-  `user_id` uuid PRIMARY KEY COMMENT 'indexed',
+  `user_id` CHAR(36) PRIMARY KEY COMMENT 'indexed',
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) UNIQUE NOT NULL,
   `password_hash` varchar(255) NOT NULL,
   `phone_number` varchar(255),
   `role` ENUM ('guest', 'host', 'admin') NOT NULL,
-  `created_at` timestamp DEFAULT (now())
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE `Property` (
-  `property_id` uuid PRIMARY KEY COMMENT 'indexed',
-  `host_id` uuid NOT NULL,
+  `property_id` CHAR(36) PRIMARY KEY COMMENT 'indexed',
+  `host_id` CHAR(36) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `location` varchar(255) NOT NULL,
   `pricepernight` decimal NOT NULL,
-  `created_at` timestamp DEFAULT (now()),
-  `updated_at` timestamp DEFAULT (now())
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE `Booking` (
-  `booking_id` uuid PRIMARY KEY COMMENT 'indexed',
-  `property_id` uuid,
-  `user_id` uuid,
+  `booking_id` CHAR(36) PRIMARY KEY COMMENT 'indexed',
+  `property_id` CHAR(36),
+  `user_id` CHAR(36),
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `status` ENUM ('pending', 'confirmed', 'canceled') NOT NULL,
-  `created_at` timestamp DEFAULT (now())
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE `Payment` (
-  `payment_id` uuid PRIMARY KEY COMMENT 'indexed',
-  `booking_id` uuid,
+  `payment_id` CHAR(36) PRIMARY KEY COMMENT 'indexed',
+  `booking_id` CHAR(36),
   `amount` decimal NOT NULL,
-  `payment_date` timestamp DEFAULT (now()),
+  `payment_date` timestamp DEFAULT CURRENT_TIMESTAMP,
   `payment_method` ENUM ('credit_card', 'paypal', 'stripe') NOT NULL
 );
 
 CREATE TABLE `Review` (
-  `review_id` uuid PRIMARY KEY COMMENT 'indexed',
-  `property_id` uuid,
-  `user_id` uuid,
+  `review_id` CHAR(36) PRIMARY KEY COMMENT 'indexed',
+  `property_id` CHAR(36),
+  `user_id` CHAR(36),
   `rating` integer NOT NULL CHECK (rating >= 1 AND rating <= 5) COMMENT 'Rating must be between 1 and 5',
   `comment` text NOT NULL,
-  `created_at` timestamp DEFAULT (now())
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE `Message` (
-  `message_id` uuid PRIMARY KEY COMMENT 'indexed',
-  `sender_id` uuid,
-  `recipient_id` uuid,
+  `message_id` CHAR(36) PRIMARY KEY COMMENT 'indexed',
+  `sender_id` CHAR(36),
+  `recipient_id` CHAR(36),
   `message_body` text NOT NULL,
-  `sent_at` timestamp DEFAULT (now())
+  `sent_at` timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE INDEX `User_index_1` ON `User` (`user_id`);
