@@ -2,9 +2,10 @@
 
 CREATE INDEX `User_full_name` ON `User` (`first_name`, `last_name`);
 CREATE INDEX `Property_name` ON `Property` (`name`);
+CREATE INDEX `Property_id` on `Property` (`property_id`);
 
 -- Measure the query performance before and after adding indexes
-EXPLAIN 
+EXPLAIN ANALYZE
     SELECT *
     FROM `Booking`
     INNER JOIN `User`
