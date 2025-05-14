@@ -14,6 +14,14 @@ EXPLAIN ANALYZE
         ON `Booking`.`booking_id` = `Payment`.`booking_id`;
 
 
+-- using `WHERE` and `AND` clauses instead of `JOIN` to filter data
+EXPLAIN ANALYZE
+    SELECT *
+    FROM `Booking`, `User`, `Property`, `Payment`
+    WHERE `Booking`.`booking_id` = `Payment`.`booking_id`
+    AND `Booking`.`property_id` = `Property`.`property_id`
+    AND `Booking`.`user_id` = `User`.`user_id`;
+
 -- Refresh the database to ensure the latest data is used
 FLUSH TABLES;
 
@@ -21,6 +29,7 @@ FLUSH TABLES;
 
 -- optimise search on booking payments with indexing
 CREATE INDEX `booking_payment` ON `Payment` (`booking_id`);
+CREATE INDEX `booking_property` ON `Booking` (`property_id`);
 
 -- refactored sql query
 EXPLAIN ANALYZE
@@ -37,3 +46,17 @@ EXPLAIN ANALYZE
         ON B.`booking_id` = Y.`booking_id`
         INNER JOIN `User` U
         ON B.`user_id` = U.`user_id`;
+
+
+-- using `WHERE` and `AND` clauses instead of `JOIN` to filter data
+EXPLAIN ANALYZE
+    SELECT B.booking_id,
+            P.name,
+            U.first_name,
+            U.last_name,
+            Y.amount,
+            Y.payment_method
+    FROM `Booking` B, `User` U, `Property` P, `Payment` Y
+    WHERE B.`booking_id` = Y.`booking_id`
+    AND B.`property_id` = P.`property_id`
+    AND B.`user_id` = U.`user_id`;
