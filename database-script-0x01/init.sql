@@ -1,4 +1,4 @@
 -- Create the database and use it
 -- Drop the database if it exists
-create DATABASE if not EXISTS airbnb_db;
-use airbnb_db;
+CREATE DATABASE IF NOT EXISTS airbnb_db;
+USE airbnb_db;
