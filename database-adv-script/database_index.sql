@@ -10,7 +10,7 @@ EXPLAIN
     INNER JOIN `User`
     ON `Booking`.`user_id` = `User`.`user_id`;
 
-EXPLAIN
+EXPLAIN ANALYZE
     SELECT *
     FROM `Property`
     LEFT JOIN `Review`
