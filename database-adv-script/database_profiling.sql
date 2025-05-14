@@ -57,6 +57,15 @@ SELECT Payment.payment_id,
     FROM `Payment`
     WHERE Payment.payment_date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH);
 
+-- based on the result the above query can be written as:
+CREATE INDEX idx_payment_date ON Payment(payment_date);
+ANALYZE TABLE Payment;
+SELECT P.payment_id,
+       P.amount,
+       P.payment_date
+    FROM `Payment` P 
+    WHERE P.payment_date >= '2024-05-14';
+
 -- write a query to show profiles to monitor the performance of the database
 SHOW PROFILE
     FOR QUERY 1;

@@ -71,6 +71,44 @@ SELECT *
 | 17  | freeing items              | 0.000238     | 0.000239     | ⚠️ Higher than normal — cleanup cost                          |
 | 18  | cleaning up                | 0.000206     | 0.000206     | ⚠️ Higher than expected — could suggest resource usage issues |
 
+### key bottlenecks
+in summary, the key bottlenecks are summarized as follows:
+| STATE                       | DURATION (s)      | Remarks                                                                             |
+| --------------------------- | ----------------- | ----------------------------------------------------------------------------------- |
+| Opening tables              | 0.006240          | Highest time spent, indicates possible I/O bottleneck or lack of table/index cache. |
+| starting                    | 0.003321          | Initial overhead; not critical but could be due to cold cache.                      |
+| executing                   | 0.000394          | Actual row retrieval; reasonable.                                                   |
+| freeing items & cleaning up | \~0.0004 combined | Minor impact, normal cleanup.                                                       |
+
 
 ## Implement the changes and report the improvements.
 
+### Query improvement
+- To improve filtering and reduce time of `opening tables` and `executing`, it is important to index.
+- To improve caching and execution plan stability, use a fixed date as '2024-05-21' in the query to avoid function execution for every row.
+
+### Revised query
+the revised query is as follows:
+
+```
+CREATE INDEX idx_payment_date ON Payment(payment_date);
+ANALYZE TABLE Payment;
+SELECT P.payment_id,
+       P.amount,
+       P.payment_date
+    FROM `Payment` P 
+    WHERE P.payment_date >= '2024-05-14';
+```
+
+### Result
+the changes made notably improved the performance of the query between 10-40% as shown in the table below.
+
+| Metric / State        | Previous Execution (Query 6) | Latest Execution (Query 4) | Δ (Difference)              |
+| --------------------- | ---------------------------- | -------------------------- | --------------------------- |
+| Total Duration        | 0.013875 sec                 | 0.005741 sec               | ⬇️ Faster by 0.008134 sec   |
+| Opening tables        | 0.006240                     | 0.001725                   | ⬇️ Significant reduction    |
+| Starting (initial)    | 0.003321                     | 0.001337                   | ⬇️ Reduced startup overhead |
+| Executing             | 0.000394                     | 0.000103                   | ⬇️ More efficient execution |
+| Cleaning up           | 0.000206                     | 0.000188                   | ⬇️ Slight improvement       |
+| Freeing items         | 0.000238                     | 0.000159                   | ⬇️ Reduced cleanup          |
+| CPU Time (User) Total | \~0.0129                     | \~0.0052                   | ⬇️ Nearly 60% less CPU      |
