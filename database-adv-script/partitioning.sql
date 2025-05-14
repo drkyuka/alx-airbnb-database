@@ -9,11 +9,9 @@ DROP TABLE IF EXISTS Booking CASCADE;
 DROP TABLE IF EXISTS Payment CASCADE;
 SET FOREIGN_KEY_CHECKS=1;
 
-
 -- show create table
 SHOW CREATE TABLE Booking;
 SHOW CREATE TABLE Booking_backup;
-
 
 CREATE TABLE IF NOT EXISTS `Booking` (
   `booking_id` CHAR(36) COMMENT 'indexed',
