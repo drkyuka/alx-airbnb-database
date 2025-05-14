@@ -14,8 +14,8 @@ SELECT
     P.name,
     P.location,
     COUNT(B.booking_id) AS NUMBER_OF_BOOKINGS,
-    row_number() over (order by COUNT(B.booking_id) desc) as booking_row_number,
-    rank() over (order by COUNT(B.booking_id) DESC) AS booking_rank
+    ROW_NUMBER() OVER (ORDER BY COUNT(B.booking_id) DESC) AS booking_row_number,
+    RANK() OVER (ORDER BY COUNT(B.booking_id) DESC) AS booking_rank
 FROM `Property` P
 INNER JOIN  `Booking` B 
 ON P.property_id = B.property_id
